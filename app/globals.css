@@ -1,0 +1,484 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-void: #050506;
+  --color-raise: #0c0c0f;
+  --color-inset: #131317;
+  --color-line: #22222a;
+  --color-hi: #f2f0ea;
+  --color-mid: #a5a29b;
+  --color-low: #6b6862;
+  --color-gold: #e8b437;
+  --color-gold-dim: #8a6a1f;
+  --color-gold-light: #f2d07a;
+  --color-signal: #38e1d4;
+  --color-alert: #ff4d4d;
+  --color-gold-glow: rgba(232, 180, 55, 0.18);
+
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-hi);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(232, 180, 55, 0.28);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #4a4842;
+}
+
+.bg-grid {
+  background-image: linear-gradient(rgba(34, 34, 42, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 34, 42, 0.4) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.btn-wipe {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-gold) 0 50%,
+    transparent 50% 100%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  transition:
+    background-position 0.22s var(--ease-state),
+    color 0.22s var(--ease-state);
+}
+
+.btn-wipe:hover {
+  background-position: 0 0;
+  color: var(--color-void);
+}
+
+.hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(165, 162, 155, 0.1) 0 3px,
+    transparent 3px 16px
+  );
+}
+
+/* ---- Engineering-drawing treatments ---- */
+
+/* Fine film grain over the flat obsidian ground, so large dark fields read as
+   a surface rather than a void. Fixed, so it never repaints on scroll. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Corner ticks — the registration marks on a technical drawing. */
+.tech-corners {
+  --tick-color: var(--color-gold-dim);
+  --tick-len: 9px;
+  --tick-weight: 1px;
+  background-image:
+    linear-gradient(var(--tick-color), var(--tick-color)),
+    linear-gradient(var(--tick-color), var(--tick-color)),
+    linear-gradient(var(--tick-color), var(--tick-color)),
+    linear-gradient(var(--tick-color), var(--tick-color)),
+    linear-gradient(var(--tick-color), var(--tick-color)),
+    linear-gradient(var(--tick-color), var(--tick-color)),
+    linear-gradient(var(--tick-color), var(--tick-color)),
+    linear-gradient(var(--tick-color), var(--tick-color));
+  background-size:
+    var(--tick-len) var(--tick-weight), var(--tick-weight) var(--tick-len),
+    var(--tick-len) var(--tick-weight), var(--tick-weight) var(--tick-len),
+    var(--tick-len) var(--tick-weight), var(--tick-weight) var(--tick-len),
+    var(--tick-len) var(--tick-weight), var(--tick-weight) var(--tick-len);
+  background-position:
+    0 0, 0 0,
+    100% 0, 100% 0,
+    0 100%, 0 100%,
+    100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  transition: --tick-color 160ms var(--ease-state);
+}
+
+.tech-corners-hover:hover {
+  --tick-color: var(--color-gold);
+}
+
+/* Crosshair register mark. */
+.crosshair {
+  position: relative;
+}
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: var(--color-gold-dim);
+  pointer-events: none;
+}
+.crosshair::before {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+.crosshair::after {
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+/* Section label rule that draws out to the right on entry. */
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.rule-draw {
+  transform-origin: left center;
+  animation: rule-draw 640ms var(--ease-entrance) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rule-draw {
+    animation: none;
+    transform: none;
+  }
+}
+
+@keyframes iris-pulse {
+  0%,
+  72%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  84% {
+    opacity: 1;
+    transform: scale(1.14);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-iris-pulse {
+  animation: iris-pulse 3.4s var(--ease-state) infinite;
+  transform-origin: center;
+}
+
+.animate-drift {
+  animation: drift 11s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-iris-pulse,
+  .animate-drift,
+  .animate-blink {
+    animation: none !important;
+  }
+}
+
+
+/* ---- Eye of Horus load / navigation motion graphic ----
+   Beat 1 the lens opens · 2 it scans · 3 it shuts · 4 the screen parts like a lid. */
+
+/* Beat 1/3 — the lens itself, scaled about the pupil line so it opens and
+   shuts the way a lid does rather than wiping a rectangle. */
+@keyframes lens-open {
+  from {
+    transform: scaleY(0.03);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes lens-close {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0.03);
+  }
+}
+
+@keyframes iris-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes iris-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* The iris drifts with the scan bar, so the eye reads as looking. */
+@keyframes iris-track {
+  0%,
+  100% {
+    transform: translateY(-1.6px);
+  }
+  50% {
+    transform: translateY(1.6px);
+  }
+}
+
+@keyframes marks-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Beat 2 — scan bar travels the height of the lens, clipped inside it. */
+@keyframes scanbar-sweep {
+  0% {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+}
+
+/* Beat 4 — the two lids retract, revealing the page underneath. */
+@keyframes lid-part-top {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes lid-part-bottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes eye-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.eye-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+}
+
+.eye-curtain__lid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background: var(--color-void);
+}
+
+.eye-curtain__lid--top {
+  top: 0;
+}
+
+.eye-curtain__lid--bottom {
+  bottom: 0;
+}
+
+.eye-curtain[data-phase="revealing"] .eye-curtain__lid--top {
+  animation: lid-part-top 340ms var(--ease-entrance) forwards;
+}
+
+.eye-curtain[data-phase="revealing"] .eye-curtain__lid--bottom {
+  animation: lid-part-bottom 340ms var(--ease-entrance) forwards;
+}
+
+.eye-curtain__eye {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(300px, 56vw);
+  transform: translate(-50%, -50%);
+}
+
+.eye-curtain[data-phase="revealing"] .eye-curtain__eye {
+  animation: eye-fade-out 200ms var(--ease-state) forwards;
+}
+
+/* Transforms are expressed in viewBox units, about the pupil line. */
+.eye-curtain__lens,
+.eye-curtain__iris {
+  transform-box: view-box;
+  transform-origin: 73px 58px;
+}
+
+.eye-curtain__lens {
+  transform: scaleY(0.03);
+}
+
+.eye-curtain[data-phase="opening"] .eye-curtain__lens {
+  animation: lens-open 300ms var(--ease-entrance) forwards;
+}
+
+.eye-curtain[data-phase="scanning"] .eye-curtain__lens,
+.eye-curtain[data-phase="closing"] .eye-curtain__lens {
+  transform: scaleY(1);
+}
+
+/* Stays shut through the reveal — it must not snap back open behind the fade. */
+.eye-curtain[data-phase="revealing"] .eye-curtain__lens {
+  transform: scaleY(0.03);
+}
+
+.eye-curtain[data-phase="closing"] .eye-curtain__lens {
+  animation: lens-close 200ms var(--ease-state) forwards;
+}
+
+.eye-curtain__iris {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.eye-curtain[data-phase="opening"] .eye-curtain__iris {
+  animation: iris-in 320ms var(--ease-entrance) 150ms forwards;
+}
+
+.eye-curtain[data-phase="scanning"] .eye-curtain__iris {
+  opacity: 1;
+  transform: scale(1);
+  animation: iris-track 260ms var(--ease-state) infinite;
+}
+
+.eye-curtain[data-phase="closing"] .eye-curtain__iris,
+.eye-curtain[data-phase="revealing"] .eye-curtain__iris {
+  animation: iris-out 160ms var(--ease-state) forwards;
+}
+
+.eye-curtain__marks {
+  opacity: 0;
+}
+
+.eye-curtain[data-phase="opening"] .eye-curtain__marks {
+  animation: marks-in 300ms var(--ease-entrance) 180ms forwards;
+}
+
+.eye-curtain[data-phase="scanning"] .eye-curtain__marks,
+.eye-curtain[data-phase="closing"] .eye-curtain__marks,
+.eye-curtain[data-phase="revealing"] .eye-curtain__marks {
+  opacity: 1;
+}
+
+.eye-curtain__scanbar {
+  opacity: 0;
+}
+
+/* Loops only while the curtain is held waiting on a route — a fast navigation
+   shows a single pass. */
+.eye-curtain[data-phase="scanning"] .eye-curtain__scanbar {
+  animation: scanbar-sweep 260ms linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eye-curtain {
+    display: none;
+  }
+}
