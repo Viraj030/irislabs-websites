@@ -55,6 +55,7 @@ export async function submitBookingRequest(
         body: JSON.stringify({
           from: "IrisLabs Site <onboarding@resend.dev>",
           to: toAddress,
+          cc: "asolkarviraj@gmail.com",
           reply_to: email,
           subject: `New discovery call request — ${name}`,
           text: `Name: ${name}\nEmail: ${email}\nBudget tier: ${budget}\nProject: ${project}\n\n${message}`,
