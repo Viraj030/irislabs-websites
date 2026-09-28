@@ -96,21 +96,12 @@ export const FOUNDERS = [
       { t: "       >90% forecast accuracy", c: MID, d: 8 },
       { t: "       −30% reporting turnaround", c: MID, d: 8 },
     ],
-    projects: [
-      {
-        label: "BreastCancerDetection — Flask + Random Forest, 97.4% accuracy",
-        url: "https://github.com/Sharva2003/BreastCancerDetection",
-      },
-      {
-        label: "Sharva2003.github.io — personal site",
-        url: "https://github.com/Sharva2003/Sharva2003.github.io",
-      },
-    ],
+    projects: [] as { label: string; url: string }[],
   },
   {
     name: "Viraj Asolkar",
     role: "Co-founder — Engineering Lead",
-    photo: null as string | null,
+    photo: "/team/Viraj.png" as string | null,
     bio: "E-commerce and web engineer. Owns storefront architecture, front-of-site engineering and performance — headless builds, Shopify, React and Next.js.",
     linkedin: "https://www.linkedin.com/in/virajasolkar/",
     github: "https://github.com/Viraj030",
@@ -131,24 +122,7 @@ export const FOUNDERS = [
       { t: "       headless + custom builds", c: MID, d: 8 },
       { t: "       Core Web Vitals · tech SEO", c: MID, d: 8 },
     ],
-    projects: [
-      {
-        label: "SaySpeech — interactive speech therapy games (Next.js)",
-        url: "https://github.com/Viraj030/SaySpeech-Articulation",
-      },
-      {
-        label: "Chatterbox Weddings — bespoke wedding stationery site",
-        url: "https://github.com/Viraj030/cblabel-weading",
-      },
-      {
-        label: "Sip & Share — recipe search + social sharing (React + Firebase)",
-        url: "https://github.com/Viraj030/Sip-Share",
-      },
-      {
-        label: "Health Assistant — health monitoring with data analysis + ML",
-        url: "https://github.com/Viraj030/Health-Assistant",
-      },
-    ],
+    projects: [] as { label: string; url: string }[],
   },
 ] as const;
 
@@ -276,33 +250,33 @@ export const PROOF = [
   {
     tag: "ECOMMERCE",
     projects: [
-      { url: "https://foodearth.com/en-in", domain: "foodearth.com", image: "/previews/foodearth.com.jpg" },
-      { url: "https://shop.kemeiprofessionals.com/", domain: "shop.kemeiprofessionals.com", image: "/previews/shop.kemeiprofessionals.com.jpg" },
-      { url: "https://derivecurates.com/", domain: "derivecurates.com", image: "/previews/derivecurates.com.jpg" },
-      { url: "https://shahiriwayat.com/", domain: "shahiriwayat.com", image: "/previews/shahiriwayat.com.jpg" },
-      { url: "https://indianchaska.in/", domain: "indianchaska.in", image: "/previews/indianchaska.in.jpg" },
+      { url: "https://foodearth.com/en-in", domain: "foodearth.com", image: "/Works/food-earth.png" },
+      { url: "https://shop.kemeiprofessionals.com/", domain: "shop.kemeiprofessionals.com", image: "/Works/shop-kemei.png" },
+      { url: "https://derivecurates.com/", domain: "derivecurates.com", image: "/Works/derive.png" },
+      { url: "https://shahiriwayat.com/", domain: "shahiriwayat.com", image: "/Works/shahi-riwayat.png" },
+      { url: "https://indianchaska.in/", domain: "indianchaska.in", image: "/Works/indian-chaska.png" },
     ],
   },
   {
     tag: "REACT / NEXT.JS",
     projects: [
-      { url: "https://aromascafeandlounge.com/", domain: "aromascafeandlounge.com", image: "/previews/aromascafeandlounge.com.jpg" },
-      { url: "https://www.kemeiprofessionals.com/", domain: "kemeiprofessionals.com", image: "/previews/kemeiprofessionals.com.jpg" },
+      { url: "https://aromascafeandlounge.com/", domain: "aromascafeandlounge.com", image: "/Works/Aromas-Cafe.png" },
+      { url: "https://www.kemeiprofessionals.com/", domain: "kemeiprofessionals.com", image: "/Works/kemei-professionals.png" },
     ],
   },
   {
     tag: "PHP",
     projects: [
-      { url: "https://mmcgym.in/", domain: "mmcgym.in", image: "/previews/mmcgym.in.jpg" },
-      { url: "https://www.finlitinstitute.com/", domain: "finlitinstitute.com", image: "/previews/finlitinstitute.com.jpg" },
-      { url: "https://alkumfoundation.com/", domain: "alkumfoundation.com", image: "/previews/alkumfoundation.com.jpg" },
+      { url: "https://mmcgym.in/", domain: "mmcgym.in", image: "/Works/MMC-GYM.png" },
+      { url: "https://www.finlitinstitute.com/", domain: "finlitinstitute.com", image: "/Works/finlit-institute.png" },
+      { url: "https://alkumfoundation.com/", domain: "alkumfoundation.com", image: "/Works/alkum-foundation.png" },
     ],
   },
   {
     tag: "PHP + BACKEND",
     projects: [
-      { url: "https://spectron.in/", domain: "spectron.in", image: "/previews/spectron.in.jpg" },
-      { url: "https://anchorvishal.com/", domain: "anchorvishal.com", image: "/previews/anchorvishal.com.jpg" },
+      { url: "https://spectron.in/", domain: "spectron.in", image: "/Works/spectron.png" },
+      { url: "https://anchorvishal.com/", domain: "anchorvishal.com", image: "/Works/anchor-vishal.png" },
     ],
   },
 ] as const;

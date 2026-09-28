@@ -149,26 +149,6 @@ function FounderRow({
             ))}
           </RevealGroup>
 
-          {person.projects.length > 0 && (
-            <div className="mt-7">
-              <div className="mb-3.5 font-mono text-[10px] tracking-[0.18em] text-low">
-                SELECTED PROJECTS
-              </div>
-              <div className="flex flex-col gap-2">
-                {person.projects.map((project) => (
-                  <a
-                    key={project.url}
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-[11px] leading-[1.6] text-mid transition-colors duration-150 hover:text-gold"
-                  >
-                    <span className="text-gold-dim">→</span> {project.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         <Reveal>

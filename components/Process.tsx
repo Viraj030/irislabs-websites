@@ -25,8 +25,8 @@ export function Process({
           Four steps, named deliverables
         </Heading>
         <p className="max-w-[58ch] text-[15px] leading-[1.65] text-mid md:text-[17px]">
-          No case studies yet, so here is the process instead. Nothing on
-          this page claims a result that did not happen.
+          Every engagement follows the same four steps. Scope before build,
+          working software before handover.
         </p>
       </Reveal>
 

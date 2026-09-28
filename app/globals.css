@@ -51,6 +51,28 @@ body {
   outline-offset: 2px;
 }
 
+/* ---- Brand scrollbar ---- */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold-dim) var(--color-raise);
+}
+/* Chromium */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-raise);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dim);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
 input::placeholder,
 textarea::placeholder {
   color: #4a4842;

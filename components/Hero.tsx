@@ -39,8 +39,9 @@ export function Hero() {
       id="top"
       ref={stageRef}
       onPointerMove={handlePointerMove}
-      className="relative overflow-hidden border-b-2 border-line px-6 py-24 md:px-15 md:py-32 lg:py-[130px]"
+      className="relative overflow-hidden border-b-2 border-line"
     >
+      {/* Background glow */}
       <div
         ref={glowRef}
         className="pointer-events-none absolute -left-[10%] -top-[20%] h-[140%] w-[70%] transition-transform duration-300 ease-out"
@@ -51,43 +52,52 @@ export function Hero() {
       />
       <div className="bg-grid pointer-events-none absolute inset-0 opacity-70" />
 
-      <div
-        ref={eyeRef}
-        className="animate-drift pointer-events-none absolute -right-10 -top-8 hidden w-[500px] opacity-95 transition-transform duration-300 ease-out md:block lg:right-20 lg:w-[760px]"
-      >
-        <HeroEye irisRef={irisRef} />
-      </div>
+      {/* ── Responsive layout: stack on mobile, side-by-side on lg ── */}
+      <div className="relative flex flex-col lg:flex-row lg:min-h-[580px]">
 
-      <div className="relative max-w-[780px]">
-        <Reveal className="mb-7 flex items-center gap-3">
-          <span className="eyebrow text-gold">01 / AI BUILD STUDIO — MUMBAI</span>
-          <span
-            className="block h-[7px] w-[7px]"
-            style={{ background: "var(--color-signal)", boxShadow: "0 0 8px var(--color-signal)" }}
-          />
-        </Reveal>
-        <Reveal>
-          <DecodeText
-            as="h1"
-            text="We build the automation, then the product around it."
-            className="mb-7 max-w-[11ch] font-display text-[42px] font-bold leading-[1.04] tracking-[-0.03em] text-hi md:text-[64px] lg:text-[76px] lg:leading-[1.0] lg:tracking-[-0.035em]"
-          />
-        </Reveal>
-        <Reveal className="mb-10 max-w-[52ch] text-[16px] leading-[1.65] text-mid md:text-[19px]">
-          AI automations, RAG systems and agents for businesses that have
-          outgrown manual process. Design and engineering in one studio, so
-          the thing you buy actually ships.
-        </Reveal>
-        <Reveal className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-          <GoldButton href="/contact" size="lg">
-            BOOK A DISCOVERY CALL
-          </GoldButton>
-          <span className="font-mono text-[11px] leading-[1.6] text-low">
-            Fixed scope. Defined deliverable.
-            <br />
-            From $2,500 / ₹1,50,000.
-          </span>
-        </Reveal>
+        {/* Text content — full width on mobile, 45% on desktop */}
+        <div className="flex flex-col justify-center px-6 pt-16 pb-10 sm:px-10 md:px-15 md:pt-20 md:pb-12 lg:w-[45%] lg:flex-none lg:py-[130px]">
+          <Reveal className="mb-5 flex items-center gap-3">
+            <span className="eyebrow text-gold">01 / AI BUILD STUDIO — MUMBAI</span>
+            <span
+              className="block h-[7px] w-[7px] flex-none"
+              style={{ background: "var(--color-signal)", boxShadow: "0 0 8px var(--color-signal)" }}
+            />
+          </Reveal>
+          <Reveal>
+            <DecodeText
+              as="h1"
+              text="We build the automation, then the product around it."
+              className="mb-6 font-display text-[34px] font-bold leading-[1.06] tracking-[-0.025em] text-hi sm:text-[44px] md:text-[52px] lg:text-[60px] lg:leading-[1.04] lg:tracking-[-0.035em]"
+            />
+          </Reveal>
+          <Reveal className="mb-8 max-w-[46ch] text-[15px] leading-[1.65] text-mid md:text-[17px] lg:text-[18px]">
+            AI automations, RAG systems and agents for businesses that have
+            outgrown manual process. Design and engineering in one studio, so
+            the thing you buy actually ships.
+          </Reveal>
+          <Reveal className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <GoldButton href="/contact" size="lg">
+              BOOK A DISCOVERY CALL
+            </GoldButton>
+            <span className="font-mono text-[11px] leading-[1.6] text-low">
+              Fixed scope. Defined deliverable.
+              <br />
+              From $2,500 / ₹1,50,000.
+            </span>
+          </Reveal>
+        </div>
+
+        {/* Eye graphic — below text on mobile/tablet, right column on lg */}
+        <div
+          ref={eyeRef}
+          className="animate-drift pointer-events-none flex w-full items-center justify-center px-8 pb-14 pt-4 md:px-16 md:pb-16 lg:w-[55%] lg:flex-none lg:px-10 lg:py-0"
+          style={{ transition: "transform 0.3s ease-out" }}
+        >
+          <div className="w-full max-w-[340px] md:max-w-[420px] lg:max-w-none">
+            <HeroEye irisRef={irisRef} />
+          </div>
+        </div>
       </div>
     </div>
   );

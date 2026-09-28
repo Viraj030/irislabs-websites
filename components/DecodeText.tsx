@@ -12,10 +12,12 @@ export function DecodeText({
   text,
   as: Tag = "span",
   className,
+  style,
 }: {
   text: string;
   as?: "span" | "h1" | "h2";
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const { ref, inView } = useInViewOnce<HTMLElement>(0.3);
   const reduced = useReducedMotion();
@@ -44,7 +46,7 @@ export function DecodeText({
 
   return (
     // @ts-expect-error -- dynamic ref tag
-    <Tag ref={ref} className={className} aria-label={text}>
+    <Tag ref={ref} className={className} style={style} aria-label={text}>
       {display || " "}
     </Tag>
   );

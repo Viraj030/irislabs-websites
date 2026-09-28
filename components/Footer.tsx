@@ -1,6 +1,7 @@
 import { TransitionLink } from "./TransitionLink";
 import { Lockup } from "./Logo";
 import { NAV_LINKS } from "@/lib/data";
+import { DecodeText } from "./DecodeText";
 
 export function Footer() {
   return (
@@ -57,19 +58,23 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Oversized wordmark, clipped by the page edge — the studio signature. */}
+      {/* Oversized centred wordmark with decode animation */}
       <div
         aria-hidden="true"
-        className="pointer-events-none mt-14 select-none overflow-hidden md:mt-20"
+        className="pointer-events-none mt-14 select-none overflow-hidden text-center md:mt-20"
       >
-        <div className="flex items-baseline whitespace-nowrap font-display text-[17vw] font-bold leading-[0.8] tracking-[-0.045em] md:text-[15vw]">
-          <span className="text-line">IRIS</span>
-          <span
+        <div className="inline-flex items-baseline whitespace-nowrap font-display text-[17vw] font-bold leading-[0.8] tracking-[-0.045em] md:text-[15vw]">
+          <DecodeText
+            as="span"
+            text="IRIS"
+            className="text-line"
+          />
+          <DecodeText
+            as="span"
+            text="LABS"
             className="text-transparent"
-            style={{ WebkitTextStroke: "1px var(--color-line)" }}
-          >
-            LABS
-          </span>
+            style={{ WebkitTextStroke: "2px var(--color-gold-dim)" }}
+          />
         </div>
       </div>
 
