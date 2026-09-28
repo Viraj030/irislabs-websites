@@ -42,7 +42,6 @@ export async function submitBookingRequest(
   rateLimit.set(ip, now);
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toAddress = process.env.BOOKING_NOTIFY_EMAIL || "hello@irislabs.dev";
 
   if (apiKey) {
     try {
@@ -54,8 +53,7 @@ export async function submitBookingRequest(
         },
         body: JSON.stringify({
           from: "IrisLabs Site <onboarding@resend.dev>",
-          to: toAddress,
-          cc: "asolkarviraj@gmail.com",
+          to: ["asolkarviraj@gmail.com", "sharvapatil056@gmail.com"],
           reply_to: email,
           subject: `New discovery call request — ${name}`,
           text: `Name: ${name}\nEmail: ${email}\nBudget tier: ${budget}\nProject: ${project}\n\n${message}`,
